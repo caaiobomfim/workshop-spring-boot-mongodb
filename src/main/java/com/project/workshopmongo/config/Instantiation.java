@@ -35,6 +35,7 @@ public class Instantiation implements CommandLineRunner {
         simpleDateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
         Post post1 = new Post(null, simpleDateFormat.parse("21/03/2023"), "Hello", "Hello everyone", new AuthorDTO(user1));
         Post post2 = new Post(null, simpleDateFormat.parse("20/11/2023"), "Bye", "Bye everyone", new AuthorDTO(user2));
+        Post post3 = new Post(null, simpleDateFormat.parse("10/01/2023"), "OK", "That was what she said", new AuthorDTO(user3));
         postRepository.deleteAll();
         postRepository.saveAll(Arrays.asList(post1, post2));
         user1.getPosts().addAll(Arrays.asList(post1, post2));
@@ -43,8 +44,10 @@ public class Instantiation implements CommandLineRunner {
         CommentDTO commentDTO1 = new CommentDTO("Good morning!",  simpleDateFormat.parse("21/03/2023"), new AuthorDTO(user3));
         CommentDTO commentDTO2 = new CommentDTO("Good afternoon!",  simpleDateFormat.parse("22/03/2023"), new AuthorDTO(user2));
         CommentDTO commentDTO3 = new CommentDTO("Good night!",  simpleDateFormat.parse("23/03/2023"), new AuthorDTO(user3));
+        CommentDTO commentDTO4 = new CommentDTO("IAEEEEE!",  simpleDateFormat.parse("10/01/2023"), new AuthorDTO(user1));
         post1.getComments().addAll(Arrays.asList(commentDTO1, commentDTO2));
         post2.getComments().add(commentDTO3);
-        postRepository.saveAll(Arrays.asList(post1, post2));
+        post3.getComments().add(commentDTO4);
+        postRepository.saveAll(Arrays.asList(post1, post2, post3));
     }
 }
