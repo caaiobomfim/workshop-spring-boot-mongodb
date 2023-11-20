@@ -2,6 +2,7 @@ package com.project.workshopmongo.config;
 
 import com.project.workshopmongo.domain.Post;
 import com.project.workshopmongo.domain.User;
+import com.project.workshopmongo.dto.AuthorDTO;
 import com.project.workshopmongo.repository.PostRepository;
 import com.project.workshopmongo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,8 +31,8 @@ public class Instantiation implements CommandLineRunner {
         userRepository.saveAll(Arrays.asList(user1, user2, user3));
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         simpleDateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
-        Post post1 = new Post(null, simpleDateFormat.parse("21/03/2023"), "Hello", "Hello everyone", user1);
-        Post post2 = new Post(null, simpleDateFormat.parse("20/11/2023"), "Bye", "Bye everyone", user2);
+        Post post1 = new Post(null, simpleDateFormat.parse("21/03/2023"), "Hello", "Hello everyone", new AuthorDTO(user1));
+        Post post2 = new Post(null, simpleDateFormat.parse("20/11/2023"), "Bye", "Bye everyone", new AuthorDTO(user2));
         postRepository.deleteAll();
         postRepository.saveAll(Arrays.asList(post1, post2));
     }
